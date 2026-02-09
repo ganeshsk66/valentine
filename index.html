@@ -17,7 +17,8 @@
 
     .card {
       background: white;
-      width: 380px;
+      width: 400px;
+      max-width: 90%;
       padding: 30px;
       border-radius: 25px;
       text-align: center;
@@ -58,13 +59,14 @@
     .memory img {
       width: 100%;
       border-radius: 15px;
-      margin-top: 8px;
+      margin-top: 10px;
     }
 
     .line {
       color: #ff4d79;
       font-weight: 500;
       margin-bottom: 8px;
+      text-align: justify;
     }
 
     @keyframes fadeIn {
@@ -96,7 +98,7 @@
   <!-- MEMORY VIEWER -->
   <div id="step2" class="hidden">
     <div class="memory" id="memoryDisplay">
-      <!-- Memory text + image will load here -->
+      <!-- Memory paragraph + image will load here -->
     </div>
     <div class="nav-buttons">
       <button id="prevBtn">Remember Again 💖</button>
@@ -119,14 +121,32 @@
     noBtn.style.top = Math.random() * 120 + "px";
   });
 
-  // Memories (text + image)
+  // Romantic memories + paragraphs
   const memories = [
-    { text: "You make ordinary days feel special 🌸", img: "WhatsApp Image 2026-02-09 at 4.50.52 PM.jpeg" },
-    { text: "Some smiles stay with you forever 😊", img: "WhatsApp Image 2026-02-09 at 4.51.25 PM.jpeg" },
-    { text: "With you, even silence feels warm ❤️", img: "WhatsApp Image 2026-02-09 at 4.51.44 PM.jpeg" },
-    { text: "Every memory with you is my favorite 💖", img: "WhatsApp Image 2026-02-09 at 4.53.01 PM.jpeg" },
-    { text: "I don’t need perfect — I just need you 💘", img: "WhatsApp Image 2026-02-09 at 4.54.01 PM.jpeg" },
-    { text: "Forever feels right with you 🥰", img: "WhatsApp Image 2026-02-09 at 4.54.06 PM.jpeg" }
+    { 
+      text: "From the moment we met, every day with you feels like a new adventure. Your smile brightens even the dullest days, and your laughter is my favorite melody. Being together makes me feel complete, like home is wherever you are.",
+      img: "WhatsApp Image 2026-02-09 at 4.50.52 PM.jpeg"
+    },
+    { 
+      text: "I love the way we share quiet moments, holding hands, talking about nothing and everything. Every shared glance, every gentle touch, makes my heart swell with happiness. You turn ordinary moments into magical memories.",
+      img: "WhatsApp Image 2026-02-09 at 4.51.25 PM.jpeg"
+    },
+    { 
+      text: "With you, even silence feels warm. I treasure every little memory we’ve created together — the laughter, the silly jokes, the little secrets that only we understand. You make life feel soft, bright, and safe.",
+      img: "WhatsApp Image 2026-02-09 at 4.51.44 PM.jpeg"
+    },
+    { 
+      text: "I adore how we dream together, encourage each other, and celebrate each little victory. Your presence turns challenges into adventures, and your love makes every day meaningful. I cherish the bond we share, more than words can express.",
+      img: "WhatsApp Image 2026-02-09 at 4.53.01 PM.jpeg"
+    },
+    { 
+      text: "I don’t need perfect moments; I just need you by my side. Your love is my safe place, your smile my sunshine. Every heartbeat reminds me how lucky I am to have you, and how wonderful life feels when we are together.",
+      img: "WhatsApp Image 2026-02-09 at 4.54.01 PM.jpeg"
+    },
+    { 
+      text: "Pihu, having you in my life is the greatest gift I could ever imagine. You are my inspiration, my laughter, my calm, and my home. I want to hold your hand through every sunrise, every dream, and every moment we have together. Forever feels perfect with you.",
+      img: "WhatsApp Image 2026-02-09 at 4.54.06 PM.jpeg"
+    }
   ];
 
   let index = 0;
@@ -144,7 +164,7 @@
       <img src="${memory.img}" alt="memory">
     `;
 
-    // Disable/Enable buttons based on index
+    // Disable buttons at boundaries
     prevBtn.disabled = index === 0;
     nextBtn.disabled = index === memories.length - 1;
   }
