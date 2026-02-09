@@ -114,7 +114,6 @@
   const memoryDisplay = document.getElementById("memoryDisplay");
   const prevBtn = document.getElementById("prevBtn");
   const nextBtn = document.getElementById("nextBtn");
-  const navButtons = document.getElementById("navButtons");
 
   // Sneaky NO button
   noBtn.addEventListener("mouseover", () => {
@@ -153,7 +152,7 @@
   // The final poem
   const poem = {
     text: "Roses may bloom and stars may shine,\nBut nothing compares to your hand in mine.\nThrough laughter, through tears, through joy and strife,\nI’m endlessly grateful to have you in my life.\nForever and always, my heart is yours.",
-    img: "WhatsApp Image 2026-02-09 at 4.50.52 PM.jpeg" // choose any image
+    img: "WhatsApp Image 2026-02-09 at 4.50.52 PM.jpeg"
   }
 
   let index = 0;
@@ -169,46 +168,47 @@
     let memory;
     if(poemShown){
       memory = poem;
+      // Poem page: hide prev, change next button
+      prevBtn.style.display = "none";
+      nextBtn.innerText = "Message Me on WhatsApp 💌";
+      nextBtn.disabled = false;
+      nextBtn.onclick = () => {
+        window.open("https://wa.me/9172992643", "_blank");
+      };
     } else {
       memory = memories[index];
+      prevBtn.style.display = "inline-block";
+      prevBtn.disabled = index === 0;
+      nextBtn.innerText = "More Love 💕";
+      nextBtn.disabled = false; // will control in click
+      nextBtn.onclick = nextMemory;
     }
 
     memoryDisplay.innerHTML = `
       <p class="line">${memory.text.replace(/\n/g,'<br>')}</p>
       <img src="${memory.img}" alt="memory">
     `;
+  }
 
-    if(poemShown){
-      // Hide prev button optional or keep it
-      prevBtn.style.display = "none"; 
-      nextBtn.innerHTML = "Waiting for you 💌";
-      nextBtn.disabled = false;
-      // Set WhatsApp link
-      nextBtn.onclick = () => {
-        window.open("https://wa.me/9172992643", "_blank");
-      }
-    } else {
-      prevBtn.style.display = "inline-block";
-      nextBtn.innerHTML = "More Love 💕";
-      nextBtn.disabled = index === memories.length - 1;
-      nextBtn.onclick = () => {
-        if(index < memories.length - 1){
-          index++;
-          showMemory();
-        } else if(index === memories.length - 1){
-          poemShown = true;
-          showMemory();
-        }
-      }
-      prevBtn.disabled = index === 0;
-      prevBtn.onclick = () => {
-        if(index > 0){
-          index--;
-          showMemory();
-        }
-      }
+  function nextMemory() {
+    if(index < memories.length - 1){
+      index++;
+      showMemory();
+    } else if(index === memories.length - 1){
+      poemShown = true;
+      showMemory();
     }
   }
+
+  prevBtn.addEventListener("click", () => {
+    if(poemShown){
+      poemShown = false;
+      showMemory();
+    } else if(index > 0){
+      index--;
+      showMemory();
+    }
+  });
 </script>
 
 </body>
