@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>For You ❤️</title>
+  <style>
+    body {
+      background: linear-gradient(#ffdde1, #ee9ca7);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Poppins, sans-serif;
+      text-align: center;
+    }
+    .box {
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      width: 360px;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 22px;
+      border-radius: 20px;
+      border: none;
+      background: #ff4d79;
+      color: white;
+      font-size: 15px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div class="box">
+  <h2>💖 Just so you know…</h2>
+  <p id="line"></p>
+  <button onclick="nextLine()">Next 💕</button>
+</div>
+
+<script>
+  const lines = [
+    "You are the reason my phone lights up with a smile 😊",
+    "Every moment with you feels like my favorite song 🎶",
+    "If love had a face, it would look like you ❤️",
+    "I didn’t choose you by chance, my heart knew 💫"
+  ];
+  let index = 0;
+
+  function nextLine() {
+    if (index < lines.length) {
+      alert(lines[index]);
+      document.getElementById("line").innerText = lines[index];
+      index++;
+    } else {
+      window.location.href = "forever.html";
+    }
+  }
+</script>
+
+</body>
+</html>
