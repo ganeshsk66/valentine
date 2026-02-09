@@ -23,7 +23,6 @@
       text-align: center;
       box-shadow: 0 15px 30px rgba(0,0,0,0.12);
       position: relative;
-      overflow: hidden;
     }
 
     h2 {
@@ -40,7 +39,7 @@
       background: #ff4d79;
       color: white;
       transition: 0.3s;
-      margin-top: 15px;
+      margin: 5px;
     }
 
     .no {
@@ -69,15 +68,17 @@
     }
 
     @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(15px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
     }
+
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 15px;
+    }
+
+    .hidden { display: none; }
   </style>
 </head>
 
@@ -85,18 +86,22 @@
 
 <div class="card">
 
-  <!-- STEP 1 -->
+  <!-- HOME PAGE -->
   <div id="step1">
-    <h2>🥰 Will you be my Valentine?</h2>
+    <h2>🥰 Pihu, will you be my Valentine?</h2>
     <button onclick="startLove()">Yes 💖</button>
     <button class="no" id="noBtn">No 🙈</button>
   </div>
 
-  <!-- STEP 2 -->
+  <!-- MEMORY VIEWER -->
   <div id="step2" class="hidden">
-    <h2>💌 Little moments…</h2>
-    <div id="content"></div>
-    <button id="nextBtn">Next 💕</button>
+    <div class="memory" id="memoryDisplay">
+      <!-- Memory text + image will load here -->
+    </div>
+    <div class="nav-buttons">
+      <button id="prevBtn">Remember Again 💖</button>
+      <button id="nextBtn">More Love 💕</button>
+    </div>
   </div>
 
 </div>
@@ -104,7 +109,8 @@
 <script>
   const noBtn = document.getElementById("noBtn");
   const step2 = document.getElementById("step2");
-  const content = document.getElementById("content");
+  const memoryDisplay = document.getElementById("memoryDisplay");
+  const prevBtn = document.getElementById("prevBtn");
   const nextBtn = document.getElementById("nextBtn");
 
   // Sneaky NO button
@@ -132,25 +138,30 @@
   }
 
   function showMemory() {
-    if (index < memories.length) {
-      const div = document.createElement("div");
-      div.className = "memory";
-      div.innerHTML = `
-        <p class="line">${memories[index].text}</p>
-        <img src="${memories[index].img}" alt="memory">
-      `;
-      content.appendChild(div);
-      index++;
+    const memory = memories[index];
+    memoryDisplay.innerHTML = `
+      <p class="line">${memory.text}</p>
+      <img src="${memory.img}" alt="memory">
+    `;
 
-      // Disable button after last memory
-      if (index === memories.length) {
-        nextBtn.disabled = true;
-        nextBtn.innerText = "All memories ❤️";
-      }
-    }
+    // Disable/Enable buttons based on index
+    prevBtn.disabled = index === 0;
+    nextBtn.disabled = index === memories.length - 1;
   }
 
-  nextBtn.addEventListener("click", showMemory);
+  nextBtn.addEventListener("click", () => {
+    if(index < memories.length - 1){
+      index++;
+      showMemory();
+    }
+  });
+
+  prevBtn.addEventListener("click", () => {
+    if(index > 0){
+      index--;
+      showMemory();
+    }
+  });
 </script>
 
 </body>
