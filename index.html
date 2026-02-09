@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Be My Forever 💖</title>
+  <title>Our Love Story 💖</title>
 
   <style>
     body {
@@ -29,6 +29,7 @@
     h2 {
       margin-bottom: 15px;
       color: #333;
+      font-size: 20px;
     }
 
     button {
@@ -43,12 +44,19 @@
       margin: 5px;
     }
 
+    #homeButtons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 15px;
+    }
+
     .no {
       background: #eee;
       color: #333;
-      position: absolute;
-      right: 40px;
-      top: 50px;
+      position: relative;
+      top: 0;
+      left: 0;
     }
 
     .memory {
@@ -90,9 +98,11 @@
 
   <!-- HOME PAGE -->
   <div id="step1">
-    <h2>🥰 Pihu, I know you are my Forever but can you send consent for this?</h2>
-    <button onclick="startLove()">Yes 💖</button>
-    <button class="no" id="noBtn">No 🙈</button>
+    <h2>🥰 Pihu, will you be the love of my life... forever?</h2>
+    <div id="homeButtons">
+      <button onclick="startLove()">Yes 💖</button>
+      <button class="no" id="noBtn">No 🙈</button>
+    </div>
   </div>
 
   <!-- MEMORY VIEWER -->
@@ -121,37 +131,37 @@
     noBtn.style.top = Math.random() * 120 + "px";
   });
 
-  // Romantic memories + paragraphs
+  // Personalized memories
   const memories = [
     { 
-      text: "From the moment we met, every day with you feels like a new adventure. Your smile brightens even the dullest days, and your laughter is my favorite melody. Being together makes me feel complete, like home is wherever you are.",
+      text: "Pihu, from the moment I, Sonu, met you, every day with you feels like a beautiful adventure. Your smile brightens my world, and your laughter is my favorite melody. Being with you completes me, my love.",
       img: "WhatsApp Image 2026-02-09 at 4.50.52 PM.jpeg"
     },
     { 
-      text: "I love the way we share quiet moments, holding hands, talking about nothing and everything. Every shared glance, every gentle touch, makes my heart swell with happiness. You turn ordinary moments into magical memories.",
+      text: "Pihu, I love the way we, Sonu and you, share quiet moments, holding hands and talking about nothing and everything. Every glance and gentle touch fills my heart with joy and makes life magical.",
       img: "WhatsApp Image 2026-02-09 at 4.51.25 PM.jpeg"
     },
     { 
-      text: "With you, even silence feels warm. I treasure every little memory we’ve created together — the laughter, the silly jokes, the little secrets that only we understand. You make life feel soft, bright, and safe.",
+      text: "With you, Pihu, even silence feels warm. I, Sonu, treasure all our little secrets, laughter, and memories. You make life bright and soft, my love, and I cherish every moment with you.",
       img: "WhatsApp Image 2026-02-09 at 4.51.44 PM.jpeg"
     },
     { 
-      text: "I adore how we dream together, encourage each other, and celebrate each little victory. Your presence turns challenges into adventures, and your love makes every day meaningful. I cherish the bond we share, more than words can express.",
+      text: "I adore how we dream together, Pihu. You inspire me, Sonu, to be better every day. Your love turns challenges into adventures and makes every day meaningful. I cherish our bond beyond words.",
       img: "WhatsApp Image 2026-02-09 at 4.53.01 PM.jpeg"
     },
     { 
-      text: "I don’t need perfect moments; I just need you by my side. Your love is my safe place, your smile my sunshine. Every heartbeat reminds me how lucky I am to have you, and how wonderful life feels when we are together.",
+      text: "I, Sonu, don’t need perfect moments; I just need you, Pihu, by my side. Your love is my safe place, your smile my sunshine. Every heartbeat reminds me how lucky I am to have you in my life.",
       img: "WhatsApp Image 2026-02-09 at 4.54.01 PM.jpeg"
     },
     { 
-      text: "Pihu, having you in my life is the greatest gift I could ever imagine. You are my inspiration, my laughter, my calm, and my home. I want to hold your hand through every sunrise, every dream, and every moment we have together. Forever feels perfect with you.",
+      text: "Pihu, having you in my life is my greatest gift. I, Sonu, want to hold your hand through every sunrise, dream, and moment. Forever feels perfect with you, my love.",
       img: "WhatsApp Image 2026-02-09 at 4.54.06 PM.jpeg"
     }
   ];
 
-  // The final poem
+  // Poem page
   const poem = {
-    text: "Roses may bloom and stars may shine,\nBut nothing compares to your hand in mine.\nThrough laughter, through tears, through joy and strife,\nI’m endlessly grateful to have you in my life.\nForever and always, my heart is yours.",
+    text: "Roses may bloom and stars may shine,\nBut nothing compares to your hand in mine.\nThrough laughter, through tears, through joy and strife,\nI, Sonu, am endlessly grateful to have you, Pihu, in my life.\nForever and always, my heart is yours.",
     img: "WhatsApp Image 2026-02-09 at 4.50.52 PM.jpeg"
   }
 
@@ -168,7 +178,6 @@
     let memory;
     if(poemShown){
       memory = poem;
-      // Poem page: hide prev, change next button
       prevBtn.style.display = "none";
       nextBtn.innerText = "Message Me on WhatsApp 💌";
       nextBtn.disabled = false;
@@ -180,7 +189,7 @@
       prevBtn.style.display = "inline-block";
       prevBtn.disabled = index === 0;
       nextBtn.innerText = "More Love 💕";
-      nextBtn.disabled = false; // will control in click
+      nextBtn.disabled = false;
       nextBtn.onclick = nextMemory;
     }
 
@@ -209,6 +218,7 @@
       showMemory();
     }
   });
+
 </script>
 
 </body>
