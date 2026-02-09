@@ -100,7 +100,7 @@
     <div class="memory" id="memoryDisplay">
       <!-- Memory paragraph + image or poem will load here -->
     </div>
-    <div class="nav-buttons">
+    <div class="nav-buttons" id="navButtons">
       <button id="prevBtn">Remember Again 💖</button>
       <button id="nextBtn">More Love 💕</button>
     </div>
@@ -114,6 +114,7 @@
   const memoryDisplay = document.getElementById("memoryDisplay");
   const prevBtn = document.getElementById("prevBtn");
   const nextBtn = document.getElementById("nextBtn");
+  const navButtons = document.getElementById("navButtons");
 
   // Sneaky NO button
   noBtn.addEventListener("mouseover", () => {
@@ -152,7 +153,7 @@
   // The final poem
   const poem = {
     text: "Roses may bloom and stars may shine,\nBut nothing compares to your hand in mine.\nThrough laughter, through tears, through joy and strife,\nI’m endlessly grateful to have you in my life.\nForever and always, my heart is yours.",
-    img: "WhatsApp Image 2026-02-09 at 4.50.52 PM.jpeg" // can reuse first image or any favorite
+    img: "WhatsApp Image 2026-02-09 at 4.50.52 PM.jpeg" // choose any image
   }
 
   let index = 0;
@@ -177,32 +178,37 @@
       <img src="${memory.img}" alt="memory">
     `;
 
-    // Disable buttons accordingly
-    prevBtn.disabled = index === 0 && !poemShown;
-    nextBtn.disabled = poemShown; // disable More Love if poem is shown
-  }
-
-  nextBtn.addEventListener("click", () => {
-    if(index < memories.length - 1){
-      index++;
-      showMemory();
-    } else if(index === memories.length - 1){
-      // Show poem on last click
-      poemShown = true;
-      showMemory();
-    }
-  });
-
-  prevBtn.addEventListener("click", () => {
     if(poemShown){
-      poemShown = false;
-      showMemory();
-    } else if(index > 0){
-      index--;
-      showMemory();
+      // Hide prev button optional or keep it
+      prevBtn.style.display = "none"; 
+      nextBtn.innerHTML = "Waiting for you 💌";
+      nextBtn.disabled = false;
+      // Set WhatsApp link
+      nextBtn.onclick = () => {
+        window.open("https://wa.me/9172992643", "_blank");
+      }
+    } else {
+      prevBtn.style.display = "inline-block";
+      nextBtn.innerHTML = "More Love 💕";
+      nextBtn.disabled = index === memories.length - 1;
+      nextBtn.onclick = () => {
+        if(index < memories.length - 1){
+          index++;
+          showMemory();
+        } else if(index === memories.length - 1){
+          poemShown = true;
+          showMemory();
+        }
+      }
+      prevBtn.disabled = index === 0;
+      prevBtn.onclick = () => {
+        if(index > 0){
+          index--;
+          showMemory();
+        }
+      }
     }
-  });
-
+  }
 </script>
 
 </body>
