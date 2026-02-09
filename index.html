@@ -98,7 +98,7 @@
   <!-- MEMORY VIEWER -->
   <div id="step2" class="hidden">
     <div class="memory" id="memoryDisplay">
-      <!-- Memory paragraph + image will load here -->
+      <!-- Memory paragraph + image or poem will load here -->
     </div>
     <div class="nav-buttons">
       <button id="prevBtn">Remember Again 💖</button>
@@ -149,7 +149,14 @@
     }
   ];
 
+  // The final poem
+  const poem = {
+    text: "Roses may bloom and stars may shine,\nBut nothing compares to your hand in mine.\nThrough laughter, through tears, through joy and strife,\nI’m endlessly grateful to have you in my life.\nForever and always, my heart is yours.",
+    img: "WhatsApp Image 2026-02-09 at 4.50.52 PM.jpeg" // can reuse first image or any favorite
+  }
+
   let index = 0;
+  let poemShown = false;
 
   function startLove() {
     document.getElementById("step1").classList.add("hidden");
@@ -158,30 +165,44 @@
   }
 
   function showMemory() {
-    const memory = memories[index];
+    let memory;
+    if(poemShown){
+      memory = poem;
+    } else {
+      memory = memories[index];
+    }
+
     memoryDisplay.innerHTML = `
-      <p class="line">${memory.text}</p>
+      <p class="line">${memory.text.replace(/\n/g,'<br>')}</p>
       <img src="${memory.img}" alt="memory">
     `;
 
-    // Disable buttons at boundaries
-    prevBtn.disabled = index === 0;
-    nextBtn.disabled = index === memories.length - 1;
+    // Disable buttons accordingly
+    prevBtn.disabled = index === 0 && !poemShown;
+    nextBtn.disabled = poemShown; // disable More Love if poem is shown
   }
 
   nextBtn.addEventListener("click", () => {
     if(index < memories.length - 1){
       index++;
       showMemory();
+    } else if(index === memories.length - 1){
+      // Show poem on last click
+      poemShown = true;
+      showMemory();
     }
   });
 
   prevBtn.addEventListener("click", () => {
-    if(index > 0){
+    if(poemShown){
+      poemShown = false;
+      showMemory();
+    } else if(index > 0){
       index--;
       showMemory();
     }
   });
+
 </script>
 
 </body>
